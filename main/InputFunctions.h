@@ -1,62 +1,56 @@
-int chooseSeconds(int color, int maxSeconds = 9){
-  int choice = 0;
+char chooseMore(char choice, char max){
+  if (choice >= max){
+    choice = max;
+  }
+  else {
+    choice++;
+  }
+  return choice;
+}
+
+char chooseLess(char choice, char min = 0){
+  if (choice <= min){
+    choice = min;
+  }
+  else{
+    choice--;
+  }
+  return choice;
+}
+
+char selectTimeInSeconds(char color, char maxSeconds = 9){
+  char choice = 0;
 
   while (true){
-    delay(80);
-    digitalWrite(color, LOW);
-    delay(80);
-    digitalWrite(color, HIGH);
-
+    blink(color, 80);
     setDisplay(choice);
 
     if (digitalRead(LESS_BUTTON) == HIGH){
-      if (choice <= 0){
-        choice = 0;
-      }
-      else {
-        choice--;
-      }
+      choice = chooseLess(choice);
     }
     else if (digitalRead(MORE_BUTTON) == HIGH){
-      if (choice >= maxSeconds){
-        choice = maxSeconds;
-      }
-      else{
-        choice++;
-      }
+      choice = chooseMore(choice, maxSeconds);
     }
     else if (digitalRead(OK_BUTTON) == HIGH) {
-      digitalWrite(color, LOW);
       return choice;
     }
   }
 }
 
-int chooseState(){
-  int choice = 0;
+char selectState(){
+  char choice = 0;
 
   while (true){
-    delay(150);
     digitalWrite(choice, HIGH);
+    delay(150);
     setDisplay(choice + 1);
+    digitalWrite(choice, LOW);
 
     if (digitalRead(LESS_BUTTON) == HIGH){
-      if (choice <= 0){
-        choice = 0;
-      }
-      else{
-        digitalWrite(choice, LOW);
-        choice--;
-      }
+      choice = chooseLess(choice);
     }
     else if (digitalRead(MORE_BUTTON) == HIGH){
-      if (choice >= 2){
-        choice = 2;
-      }
-      else {
-        digitalWrite(choice, LOW);
-        choice++;
-      }
+      choice = chooseMore(choice, 2);
     }
     else if (digitalRead(OK_BUTTON) == HIGH) {
       digitalWrite(choice, LOW);

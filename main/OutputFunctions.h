@@ -1,5 +1,5 @@
-void setDisplay(unsigned int second){
-  for (int b = 0; b < 4; b++){
+void setDisplay(char second){
+  for (char b = 0; b < 4; b++){
     bool bit = (second >> b) & 1;
 
     if (bit) {
@@ -11,8 +11,7 @@ void setDisplay(unsigned int second){
   }
 };
 
-void setLeds(int sign){
-
+void setLeds(char sign){
   digitalWrite(GREEN, LOW);
   digitalWrite(YELLOW, LOW);
   digitalWrite(RED, LOW);
@@ -26,4 +25,11 @@ void setLeds(int sign){
   else if (sign == RED){
     digitalWrite(RED, HIGH);
   }
+}
+
+void blink(char color, unsigned char miliseconds){
+  delay(miliseconds);
+  digitalWrite(color, HIGH);
+  delay(miliseconds);
+  digitalWrite(color, LOW);
 }

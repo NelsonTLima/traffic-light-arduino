@@ -1,13 +1,12 @@
 class Light {
   public:
-  int currentState, secondsRed, secondsYellow, secondsGreen;
-  int seconds[3];
+  char currentState, secondsRed, secondsYellow, secondsGreen, seconds[3];
 
   Light(
-      int currentState = YELLOW,
-      int secondsRed = 9,
-      int secondsYellow = 2,
-      int secondsGreen = 7
+      char currentState = YELLOW,
+      char secondsRed = 9,
+      char secondsYellow = 2,
+      char secondsGreen = 7
       )
   {
     this -> currentState = currentState;

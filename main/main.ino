@@ -6,32 +6,32 @@
 
   by Nelson Lima
 */
-
+#pragma once
 #include "Dependencies.h"
 
 void setup() {
   // INPUT PINS:
   // 0-2 -> red, yellow and green leds.
   // 3-6 -> CD4511 -> DISPLAY.
-  for (int pin = 0; pin < 7; pin ++){
+  for (char pin = 0; pin < 7; pin ++){
     pinMode(pin, OUTPUT);
   }
   // OUTPUT PINS: 7-9 -> BUTTONS.
-  for (int pin = 0; pin < 3; pin ++){
+  for (char pin = 0; pin < 3; pin ++){
     pinMode(LESS_BUTTON + pin, INPUT);
   }
 };
 
 void loop() {
-  //Display only shows 0 - 9. 
+  //Display only shows 0 - 9.
   //Yellow light must not last more than green light.
-  int state, secondsYellow, secondsGreen, secondsRed, maxYellow = 4, maxDisplaySeconds = 9;
+  char state, secondsYellow, secondsGreen, secondsRed, maxYellow = 4, maxDisplaySeconds = 9;
 
   // Get User's input.
-  secondsYellow = chooseSeconds(YELLOW, maxYellow);
-  secondsGreen = chooseSeconds(GREEN, maxDisplaySeconds - secondsYellow);
-  secondsRed = chooseSeconds(RED);
-  state = chooseState();
+  secondsYellow = selectTimeInSeconds(YELLOW, maxYellow);
+  secondsGreen = selectTimeInSeconds(GREEN, maxDisplaySeconds - secondsYellow);
+  secondsRed = selectTimeInSeconds(RED);
+  state = selectState();
 
   //Start Traffic light.
   Timer timer;
